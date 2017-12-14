@@ -4,7 +4,15 @@ BUT NOW. I have once again returned with something I actually plan on seeing gto
 
 Everythinng following this line will just be simple ideas or changelog information just so I can keep track of different versioning.
 
+-------------
+CHANGELOG
+-------------
 
+-------------
 VERSION 0.1a
 -------------
 + Imported important classes from ZorkGame project.
+    -> Character.java, Spells.java
++ Created the Game class
+
+-------------
