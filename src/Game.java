@@ -4,6 +4,9 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable {
 
@@ -21,8 +24,21 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
+    private BufferedImage spriteSheet = null;
     ////////////////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //Initialize
+    public void init(){
+        BufferedImageLoader loader = new BufferedImageLoader();
+        try{
+            spriteSheet = loader.loadImage("/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
     //Starting thread
     private synchronized void start() {
@@ -53,7 +69,7 @@ public class Game extends Canvas implements Runnable {
     //Runnable Method
     @Override
     public void run() {
-
+        init();
         long lastTime = System.nanoTime();
         final double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -101,6 +117,23 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void render() {//Everything that renders
+        BufferStrategy bs = this.getBufferStrategy();
+
+        if(bs==null){
+            createBufferStrategy(3);//Triple buffering, increases speed overtime.
+            return;
+        }
+
+        Graphics g =bs.getDrawGraphics();//Draws out buffers
+        ////////////////////////////////////////////////////////////////////////////////////////
+        //Between these comment lines is where images can be drawn out to the screen
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+
+        //End of drawing
+        ////////////////////////////////////////////////////////////////////////////////////////
+        g.dispose();//Destroys image
+        bs.show();//Shows buffer
+
 
     }
 
