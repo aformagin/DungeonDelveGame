@@ -2,11 +2,32 @@
 //of combat
 //Programmer Assigned: Austin
 
+import java.awt.*;
+
 public class Movement {
-    private int charPosX;
-    private int charPosY;
+    private double charPosX;
+    private double charPosY;
 
+    public Movement(double charPosX, double charPosY){
+        this.charPosX = charPosX;
+        this.charPosY = charPosY;
+    }
 
+    public void tick(){
+
+    }
+
+    public void render(Graphics g){//Draws image
+
+    }
+
+    public double getCharPosX(){
+        return this.charPosX;
+    }
+
+    public double getCharPosY(){
+        return this.charPosY;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //Change the values of X & Y
