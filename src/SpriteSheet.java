@@ -10,6 +10,7 @@ public class SpriteSheet {
 
     //Grabs the image from the sprite sheet
     public BufferedImage grabImage(int col, int row, int width, int height) {
+        //Finds the part of the sprite sheet to grab, starting at pixel 0 of the square
         BufferedImage img = image.getSubimage((col* 32) - 32, (row *32)-32, width, height);
         return img;
     }

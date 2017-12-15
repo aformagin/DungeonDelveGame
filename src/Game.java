@@ -33,8 +33,8 @@ public class Game extends Canvas implements Runnable {
     public void init(){
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
-        }catch(IOException e){
+            spriteSheet = loader.loadImage("src/res/images/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
+        }catch(IOException e){//Error catching :D
             e.printStackTrace();
         }
     }
@@ -107,7 +107,7 @@ public class Game extends Canvas implements Runnable {
 
 
         }
-        stop();//Stops the game :(
+        stop();//Stops the game
 
     }//end of run method
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -127,7 +127,7 @@ public class Game extends Canvas implements Runnable {
         Graphics g =bs.getDrawGraphics();//Draws out buffers
         ////////////////////////////////////////////////////////////////////////////////////////
         //Between these comment lines is where images can be drawn out to the screen
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
 
         //End of drawing
         ////////////////////////////////////////////////////////////////////////////////////////
