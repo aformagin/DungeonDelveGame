@@ -6,11 +6,10 @@
 public class Spells {
 
 
-    String spellType;//The type of spell it is, damage, healing, etc. Types will be defined me in the readMe
-    int damage;//The amount of damage it will do, or will determine if it heals
-    boolean learned;//Determines 0if the user has the spell learned
-    int manaRequired;//The amount of 'mana' required to use this spell
-    int mana;//User's total mana, will go into character generation at somepoinr
+    private String spellType;//The type of spell it is, damage, healing, etc. Types will be defined me in the readMe
+    private int damage;//The amount of damage it will do, or will determine if it heals
+    private boolean learned;//Determines if the user has the spell learned
+   private  int manaRequired;//The amount of 'mana' required to use this spell
 
     public Spells() {
         this.spellType = "DIRECT";
@@ -23,7 +22,7 @@ public class Spells {
     }
 
     //Randomly assigns spell damage
-    public int SpellDamage(int lowDMG, int highDMG) {
+    private  int SpellDamage(int lowDMG, int highDMG) {
         int outputDMG;
         outputDMG = (int) Math.round(Math.random() * (highDMG - lowDMG + 1) + lowDMG);
         return outputDMG;

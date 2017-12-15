@@ -10,8 +10,9 @@ public class Game extends Canvas implements Runnable {
     ////////////////////////////////////////////////////////////////////////////////////////
     //Variables
     ////////////////////////////////////////////////////////////////////////////////////////
+
     //Height of window
-    public static final int HEIGHT = 800;//Setting the height of the screen to 800 pixels
+    public static final int HEIGHT = 320;//Setting the height of the screen to 800 pixels
     //Width of window
     public static final int WIDTH = (HEIGHT * 16) / 9;//Creating a 16:9 ratio
     public static final int SCALE = 2;//Scale factor, this will be used to scale the size of the window up
@@ -19,21 +20,23 @@ public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
     private Thread thread;
+
     ////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //Starting thread
-    private synchronized void start(){
+    private synchronized void start() {
         if (running)
             return;
         running = true;
         thread = new Thread(this);
         thread.start();
     }//end of start method
+
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
-    private synchronized void stop(){
-        if(!running)
+    private synchronized void stop() {
+        if (!running)
             return;
         running = false;
         try {
@@ -44,20 +47,66 @@ public class Game extends Canvas implements Runnable {
         System.exit(1);
     }//end of stop method
     ////////////////////////////////////////////////////////////////////////////////////////
+
+
     ////////////////////////////////////////////////////////////////////////////////////////
     //Runnable Method
     @Override
     public void run() {
-        while(running){
-        System.out.println("Running");
-        //The game loop :D A.K.A The heart of the game!
+
+        long lastTime = System.nanoTime();
+        final double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        int updates = 0;
+        int frames = 0;
+        long timer =System.currentTimeMillis();
+
+        while (running) {
+            //The game loop :D A.K.A The heart of the game!
+
+            long newTime = System.nanoTime();
+            delta += (newTime- lastTime) / ns;
+            lastTime = newTime;
+
+            if (delta >= 1) {//"Catch up" for FPS and Ticks
+                tick();//Sets a maximum amount of ticks/second
+                updates++;
+                delta--;
+            }
+            render();//Renders the screen
+            frames++;//Adds to the frame counter
+
+            if(System.currentTimeMillis() - timer > 1000){
+                timer += 1000;//Sets to 1000 to exit out.
+
+                //Displays the tick rate and frame rate
+                System.out.println("Ticks: " + updates);
+                System.out.println("FPS: " + frames);
+
+                //Resets back to zero
+                updates = 0;
+                frames = 0;
+            }
+
+
         }
         stop();//Stops the game :(
 
     }//end of run method
     ////////////////////////////////////////////////////////////////////////////////////////
+
+    private void tick() {//Everything that updates
+
+    }
+
+    private void render() {//Everything that renders
+
+    }
+
+
     ////////////////////////////////////////////////////////////////////////////////////////
-    public static void main (String args[]){
+    public static void main(String args[]) {
         Game game = new Game();//Creating a game object
 
         //Window Creation
@@ -74,18 +123,12 @@ public class Game extends Canvas implements Runnable {
         frame.setVisible(true);//Makes the frame visible
 
 
-
         //Call on the start method to start the game
         game.start();
     }//end of main method
     ////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////////
-
-    //Movement or something? I'll figure this part out later
-
-    //FPS counter, this will only be displayed as a command line program. In this form, it will not be meant
-    //for the end user.
-
-
-
 }//end of Game Class
