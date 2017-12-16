@@ -25,7 +25,10 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
 
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-    private BufferedImage spriteSheet = null;
+   private BufferedImage spriteSheet = null;
+
+   //temp
+    private BufferedImage player;
     ////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -33,10 +36,12 @@ public class Game extends Canvas implements Runnable {
     public void init(){
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("src/res/images/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
+            spriteSheet = loader.loadImage("res/images/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
         }catch(IOException e){//Error catching :D
             e.printStackTrace();
         }
+        SpriteSheet ss = new SpriteSheet(spriteSheet);
+        player = ss.grabImage(1,1,32,32);
     }
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +134,7 @@ public class Game extends Canvas implements Runnable {
         //Between these comment lines is where images can be drawn out to the screen
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
 
+        g.drawImage(player, 100, 100, this);
         //End of drawing
         ////////////////////////////////////////////////////////////////////////////////////////
         g.dispose();//Destroys image
