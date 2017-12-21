@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 //////////////////////////////
 //Character class
 //////////////////////////////
@@ -10,8 +13,12 @@ public class Character
     private int armor;
     private int hp;
     private int mana;
+    private double charPosX;
+    private double charPosY;
+    private BufferedImage player;
 
-    public Character (){
+
+    public Character (double charPosX, double charPosY, Game game){
         this.str = 10;
         this.con = 10;
         this.intel = 10;
@@ -19,14 +26,36 @@ public class Character
         this.armor = 0;
         this.hp = this.con * 2;
         this.mana = 0;
+        this.charPosX = charPosX;
+        this.charPosY = charPosY;
+
+        SpriteSheet ss = new SpriteSheet(game.getSpriteSheet());
+        player = ss.grabImage(1,1,32,32);
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    // Ticks and rendering images
+    ///////////////////////////////////////////////////////////////////////////////////////
+    public void tick(){
 
+    }
+
+    public void render(Graphics g){//Draws image
+        g.drawImage(player, (int)charPosX, (int)charPosY, null);
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Accessors
     ///////////////////////////////////////////////////////////////////////////////////////
+
+    public double getCharPosX(){
+        return this.charPosX;
+    }
+    public double getCharPosY(){
+        return this.charPosY;
+    }
     public int getStr (){
         return this.str;
     }
@@ -59,6 +88,14 @@ public class Character
     ///////////////////////////////////////////////////////////////////////////////////////
     // Mutators
     ///////////////////////////////////////////////////////////////////////////////////////
+    public void setCharPosX(double x){
+        this.charPosX = x;
+    }
+
+    public void setCharPosY(double y){
+        this.charPosY = y;
+    }
+
     //Strength stat of the character, determines the carrying capacity and ability to do
     //strength based tasks
     public void setStr (int s){
