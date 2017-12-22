@@ -152,13 +152,13 @@ public class Game extends Canvas implements Runnable {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_W) {
-            character.setCharPosY(character.getCharPosY()- 5);
+            character.setVelY(-2);
         } else if (key == KeyEvent.VK_A) {
-            character.setCharPosX(character.getCharPosX()- 5);
+            character.setVelX(-2);
         }else if (key == KeyEvent.VK_S) {
-            character.setCharPosY(character.getCharPosY()+ 5);
+            character.setVelY(2);
         }else if (key == KeyEvent.VK_D) {
-            character.setCharPosX(character.getCharPosX()+ 5);
+            character.setVelX(2);
         }
     }
 
@@ -166,9 +166,13 @@ public class Game extends Canvas implements Runnable {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_W) {
+            character.setVelY(0);
         }else if (key == KeyEvent.VK_A) {
+            character.setVelX(0);
         }else if (key == KeyEvent.VK_S) {
+            character.setVelY(0);
         }else if (key == KeyEvent.VK_D) {
+            character.setVelX(0);
         }
     }
 
@@ -185,9 +189,10 @@ public class Game extends Canvas implements Runnable {
         frame.add(game);//Adds the game to the frame
         frame.pack();//Sets all contents to preferred sizes
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Sets the function to close
-        frame.setResizable(true);//Allows the window to be resized
+        frame.setResizable(false);//Allows the window to be resized
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);//Makes the frame visible
+
 
 
         //Call on the start method to start the game

@@ -15,6 +15,8 @@ public class Character
     private int mana;
     private double charPosX;
     private double charPosY;
+    private double charVelX;
+    private double charVelY;
     private BufferedImage player;
 
 
@@ -38,7 +40,8 @@ public class Character
     // Ticks and rendering images
     ///////////////////////////////////////////////////////////////////////////////////////
     public void tick(){
-
+        charPosY+=charVelY;
+        charPosX+=charVelX;
     }
 
     public void render(Graphics g){//Draws image
@@ -56,6 +59,7 @@ public class Character
     public double getCharPosY(){
         return this.charPosY;
     }
+    public BufferedImage getPlayer(){return this.player;}
     public int getStr (){
         return this.str;
     }
@@ -96,6 +100,13 @@ public class Character
         this.charPosY = y;
     }
 
+    public void setVelX(double velX){
+        this.charVelX = velX;
+    }
+
+    public void setVelY(double velY){
+        this.charVelY = velY;
+    }
     //Strength stat of the character, determines the carrying capacity and ability to do
     //strength based tasks
     public void setStr (int s){
@@ -156,6 +167,7 @@ public class Character
             //to the players health.
             this.hp = this.hp + -dmg;
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////
 
 
