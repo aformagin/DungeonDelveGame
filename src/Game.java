@@ -159,6 +159,7 @@ public class Game extends Canvas implements Runnable {
             character.setVelY(2);
         }else if (key == KeyEvent.VK_D) {
             character.setVelX(2);
+            character.setPlayer(1,2,32,32);
         }
     }
 

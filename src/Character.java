@@ -18,6 +18,7 @@ public class Character
     private double charVelX;
     private double charVelY;
     private BufferedImage player;
+    private SpriteSheet ss;
 
 
     public Character (double charPosX, double charPosY, Game game){
@@ -31,8 +32,8 @@ public class Character
         this.charPosX = charPosX;
         this.charPosY = charPosY;
 
-        SpriteSheet ss = new SpriteSheet(game.getSpriteSheet());
-        player = ss.grabImage(1,1,32,32);
+        ss = new SpriteSheet(game.getSpriteSheet());
+        this.player = ss.grabImage(1,1,32,32);
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,6 +142,9 @@ public class Character
 
     //Sets the mana points of the character
     public void setMana(int m){this.mana = m;}
+    public void setPlayer(int col, int row, int w, int h){
+        this.player = ss.grabImage(col, row, w, h);
+    }
     ////////////////////////////////////////////////////////////////////////////////////////
 
 
