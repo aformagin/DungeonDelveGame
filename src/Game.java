@@ -23,12 +23,14 @@ public class Game extends Canvas implements Runnable {
     public final String TITLE = "Dungeon Delve 0.1a";//Title of the game
 
     private boolean running = false;
-    private Thread thread;
+    private Thread gameThread;
+
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage spriteSheet = null;
 
     private Character character;
+    private Thread animate;
     ////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -48,13 +50,13 @@ public class Game extends Canvas implements Runnable {
 
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
-    //Starting thread
+    //Starting gameThread
     private synchronized void start() {
         if (running)
             return;
         running = true;
-        thread = new Thread(this);
-        thread.start();
+        gameThread = new Thread(this);
+        gameThread.start();
     }//end of start method
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +66,7 @@ public class Game extends Canvas implements Runnable {
             return;
         running = false;
         try {
-            thread.join();
+            gameThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -159,7 +161,6 @@ public class Game extends Canvas implements Runnable {
             character.setVelY(2);
         }else if (key == KeyEvent.VK_D) {
             character.setVelX(2);
-            character.setPlayer(1,2,32,32);
         }
     }
 

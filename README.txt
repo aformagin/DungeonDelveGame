@@ -5,7 +5,12 @@ BUT NOW. I have once again returned with something I actually plan on seeing to 
 Everything following this line will just be simple ideas or change log information just so I can keep track of different versioning.
 
 
-
+-----------------------------
+Summary of Dungeon Delve:
+-----------------------------
+Still figuring this part out.
+-----------------------------
+-----------------------------
 -------------
 CHANGELOG
 -------------
@@ -16,6 +21,7 @@ VERSION 0.1a
 + Imported important classes from ZorkGame project.
     -> Character.java, Spells.java
 + Created the Game class
++ The running game maybe?
 
 -------------
 
@@ -23,6 +29,8 @@ Dungeon Delve Credits
 
 Developed by: Austin, Michael, & Nathan
 
-Story By: -
+Story By: - Austin
 
 Art By: -
+
+Sound Design - Michael
