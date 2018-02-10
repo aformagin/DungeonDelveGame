@@ -17,11 +17,13 @@ public class Character
     private double charPosY;
     private double charVelX;
     private double charVelY;
+    private Textures tex;
     private BufferedImage player;
     private SpriteSheet ss;
+    public  Animation anim;
 
 
-    public Character (double charPosX, double charPosY, Game game){
+    public Character(double charPosX, double charPosY, Textures tex){
         this.str = 10;
         this.con = 10;
         this.intel = 10;
@@ -31,9 +33,12 @@ public class Character
         this.mana = 0;
         this.charPosX = charPosX;
         this.charPosY = charPosY;
+        this.tex = tex;
+        anim = new Animation(10, tex.overworldPlayer[0], tex.overworldPlayer[1]);
 
-        ss = new SpriteSheet(game.getSpriteSheet());
-        this.player = ss.grabImage(1,1,32,32);
+
+        //ss = new SpriteSheet(game.getSpriteSheet());
+       // this.player = ss.grabImage(1,1,32,32);
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,10 +48,12 @@ public class Character
     public void tick(){
         charPosY+=charVelY;
         charPosX+=charVelX;
+        anim.runAnimation();
     }
 
     public void render(Graphics g){//Draws image
-        g.drawImage(player, (int)charPosX, (int)charPosY, null);
+        g.drawImage(tex.overworldPlayer[0], (int)charPosX, (int)charPosY, null);
+       // anim.drawAnimation(g, charPosX, charPosY, 0);
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -100,6 +107,7 @@ public class Character
     public void setCharPosY(double y){
         this.charPosY = y;
     }
+
 
     public void setVelX(double velX){
         this.charVelX = velX;

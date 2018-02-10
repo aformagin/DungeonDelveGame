@@ -2,12 +2,16 @@
 //end up taking in place! Surprise, surprise. It is almost like this is our MAIN CLASS or something?
 
 
+import org.lwjgl.Version;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+
 
 public class Game extends Canvas implements Runnable {
 
@@ -30,7 +34,8 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage spriteSheet = null;
 
     private Character character;
-    private Thread animate;
+    private boolean animate = false;
+    private Textures tex;
     ////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +50,8 @@ public class Game extends Canvas implements Runnable {
 
         addKeyListener(new KeyInput(this));
         this.requestFocus();
-        character = new Character(100, 100, this);//Character creation
+        tex = new Textures(this);
+        character = new Character(100, 100, tex);//Character creation
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -128,6 +134,7 @@ public class Game extends Canvas implements Runnable {
 
     private void render() {//Everything that renders
         BufferStrategy bs = this.getBufferStrategy();
+        animate = false;
 
         if (bs == null) {
             createBufferStrategy(3);//Triple buffering, increases speed overtime.
@@ -139,9 +146,11 @@ public class Game extends Canvas implements Runnable {
         //Between these comment lines is where images can be drawn out to the screen
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
 
-        character.render(g);
+        animate = false;
 
-        //End of drawing
+        character.render(g);
+            character.anim.drawAnimation(g, character.getCharPosX(), character.getCharPosY(), 0);//Currently flips the image at a constant rate
+        //End of
         ////////////////////////////////////////////////////////////////////////////////////////
         g.dispose();//Destroys image
         bs.show();//Shows buffer
@@ -155,12 +164,17 @@ public class Game extends Canvas implements Runnable {
 
         if (key == KeyEvent.VK_W) {
             character.setVelY(-2);
+            animate = true;
         } else if (key == KeyEvent.VK_A) {
             character.setVelX(-2);
-        }else if (key == KeyEvent.VK_S) {
+            animate = true;
+        } else if (key == KeyEvent.VK_S) {
             character.setVelY(2);
-        }else if (key == KeyEvent.VK_D) {
+            animate = true;
+        } else if (key == KeyEvent.VK_D) {
             character.setVelX(2);
+            animate = true;
+            //character.setPlayer(1,1,32,32);
         }
     }
 
@@ -169,12 +183,16 @@ public class Game extends Canvas implements Runnable {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_W) {
             character.setVelY(0);
-        }else if (key == KeyEvent.VK_A) {
+            animate = false;
+        } else if (key == KeyEvent.VK_A) {
             character.setVelX(0);
-        }else if (key == KeyEvent.VK_S) {
+            animate = false;
+        } else if (key == KeyEvent.VK_S) {
             character.setVelY(0);
-        }else if (key == KeyEvent.VK_D) {
+            animate = false;
+        } else if (key == KeyEvent.VK_D) {
             character.setVelX(0);
+            animate = false;
         }
     }
 
@@ -194,7 +212,6 @@ public class Game extends Canvas implements Runnable {
         frame.setResizable(false);//Allows the window to be resized
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);//Makes the frame visible
-
 
 
         //Call on the start method to start the game
