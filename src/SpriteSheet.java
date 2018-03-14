@@ -15,4 +15,8 @@ public class SpriteSheet {
         return img;
     }
 
+    public BufferedImage grabMap (int col, int row, int width, int height){
+        BufferedImage img = image.getSubimage((col* 512) - 512, (row *512)-512, width, height);
+        return img;
+    }
 }

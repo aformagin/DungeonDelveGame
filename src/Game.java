@@ -2,8 +2,6 @@
 //end up taking in place! Surprise, surprise. It is almost like this is our MAIN CLASS or something?
 
 
-import org.lwjgl.Version;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
