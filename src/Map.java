@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public class Map {
-    private Tile [][] tiles;                // a Map is a collection of tiles
+    private Tile [][] tiles;    // a Map is a collection of tiles
 
     public Map (){
         tiles = new Tile [1][1];            // default Map is a 1x1 grid.
@@ -19,4 +19,12 @@ public class Map {
             } // for y
         } // for x
     } // Map constructor 2
+
+    public int getXSize (){
+        return tiles.length;
+    } // getXSize method
+
+    public int getYSize (){
+        return tiles[0].length;
+    } // getYSize method
 } // Map class
