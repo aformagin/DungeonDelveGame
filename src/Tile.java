@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.io.*;
 
 public class Tile {
     private int height;             // the z-value of the tile
@@ -6,13 +7,18 @@ public class Tile {
     private boolean tall;           // if a flying unit can pass
     private int moveMod;            // how much is removed from unit's possible movement.
     private BufferedImage texture;  // the tile's graphic
+    private BufferedImageLoader loader = new BufferedImageLoader();
 
-    public Tile(){
+    public Tile() throws IOException{
         this.height = 0;
         this.passable = true;
         this.tall = true;
         this.moveMod = 0;
-        this.texture = null;
+        try {
+            this.texture = loader.loadImage("res/images/missing_texture.png");
+        } catch (IOException e) {//Error catching :D
+            e.printStackTrace();
+        }
     }
 
     public Tile(int height, boolean passable, boolean tall, int moveMod, BufferedImage texture){  // add image
