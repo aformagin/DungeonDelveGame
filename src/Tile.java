@@ -16,7 +16,7 @@ public class Tile {
         this.moveMod = 0;
         try {
             this.texture = loader.loadImage("res/images/missing_texture.png");
-        } catch (IOException e) {//Error catching :D
+        } catch (IOException e) {   //Error catching :D
             e.printStackTrace();
         }
     }
