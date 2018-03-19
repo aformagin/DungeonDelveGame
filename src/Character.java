@@ -1,10 +1,15 @@
+
+
+
+
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 //////////////////////////////
 //Character class
 //////////////////////////////
-public class Character
+public class Character extends GameObject
 {
     private int str;
     private int con;
@@ -20,10 +25,11 @@ public class Character
     private Textures tex;
     private BufferedImage player;
     private SpriteSheet ss;
-    public  Animation anim;
+    public Animation anim;
 
 
     public Character(double charPosX, double charPosY, Textures tex){
+        super(charPosX,charPosY);
         this.str = 10;
         this.con = 10;
         this.intel = 10;
@@ -31,8 +37,6 @@ public class Character
         this.armor = 0;
         this.hp = this.con * 2;
         this.mana = 0;
-        this.charPosX = charPosX;
-        this.charPosY = charPosY;
         this.tex = tex;
         anim = new Animation(10, tex.overworldPlayer[0], tex.overworldPlayer[1]);
 

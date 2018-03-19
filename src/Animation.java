@@ -1,4 +1,3 @@
-
 /* This class allows for animations up to 14 frames/images long
 We can extend this later if need be.*/
 import java.awt.Graphics;
