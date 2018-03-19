@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage spriteSheet = null;
+    private BufferedImage background = null;
 
     private Character character;
     private boolean animate = false;
@@ -42,6 +43,7 @@ public class Game extends Canvas implements Runnable {
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("res/images/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
+            background = loader.loadImage("res/images/missing_texture.png");
         } catch (IOException e) {//Error catching :D
             e.printStackTrace();
         }
@@ -143,6 +145,12 @@ public class Game extends Canvas implements Runnable {
         ////////////////////////////////////////////////////////////////////////////////////////
         //Between these comment lines is where images can be drawn out to the screen
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
+
+        //For loop to draw images across the screen for mapping
+        g.drawImage(background, 0, 32, null);
+        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 64, null);
+        g.drawImage(background, 32, 32, null);
 
         animate = false;
 
