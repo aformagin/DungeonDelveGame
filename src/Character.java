@@ -1,7 +1,4 @@
-
-
-
-
+import entities.EntityBase;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +6,7 @@ import java.awt.image.BufferedImage;
 //////////////////////////////
 //Character class
 //////////////////////////////
-public class Character extends GameObject
+public class Character extends GameObject implements EntityBase
 {
     private int str;
     private int con;
@@ -17,11 +14,17 @@ public class Character extends GameObject
     private int dex;
     private int armor;
     private int hp;
+    private int wis;
     private int mana;
-    private double charPosX;
-    private double charPosY;
-    private double charVelX;
-    private double charVelY;
+
+    /*TODO Thinking about making a seperate class to handle the above variables...
+    for in battle, and if trying to access outside of battle, it will call on that
+    sperate class. But we will have to see.
+    */
+   // private double charPosX;
+   // private double charPosY;
+    private double velY = 0;
+    private double velX = 0;
     private Textures tex;
     private BufferedImage player;
     private SpriteSheet ss;
@@ -34,8 +37,9 @@ public class Character extends GameObject
         this.con = 10;
         this.intel = 10;
         this.dex = 10;
+        this.wis = 10;
         this.armor = 0;
-        this.hp = this.con * 2;
+        //this.hp = this.con * 2;
         this.mana = 0;
         this.tex = tex;
         anim = new Animation(10, tex.overworldPlayer[0], tex.overworldPlayer[1]);
@@ -50,26 +54,28 @@ public class Character extends GameObject
     // Ticks and rendering images
     ///////////////////////////////////////////////////////////////////////////////////////
     public void tick(){
-        charPosY+=charVelY;
-        charPosX+=charVelX;
+        x +=velX;
+        y += velY;
         anim.runAnimation();
     }
 
     public void render(Graphics g){//Draws image
-        g.drawImage(tex.overworldPlayer[0], (int)charPosX, (int)charPosY, null);
+        g.drawImage(tex.overworldPlayer[0], (int)x, (int)y, null);
        // anim.drawAnimation(g, charPosX, charPosY, 0);
     }
+
+
     ///////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Accessors
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public double getCharPosX(){
-        return this.charPosX;
+    public double getX(){
+        return this.x;
     }
-    public double getCharPosY(){
-        return this.charPosY;
+    public double getY() {
+        return this.y;
     }
     public BufferedImage getPlayer(){return this.player;}
     public int getStr (){
@@ -105,20 +111,20 @@ public class Character extends GameObject
     // Mutators
     ///////////////////////////////////////////////////////////////////////////////////////
     public void setCharPosX(double x){
-        this.charPosX = x;
+        this.x = x;
     }
 
     public void setCharPosY(double y){
-        this.charPosY = y;
+        this.x = y;
     }
 
 
     public void setVelX(double velX){
-        this.charVelX = velX;
+        this.velX = velX;
     }
 
     public void setVelY(double velY){
-        this.charVelY = velY;
+        this.velY = velY;
     }
     //Strength stat of the character, determines the carrying capacity and ability to do
     //strength based tasks

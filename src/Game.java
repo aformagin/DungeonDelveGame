@@ -155,7 +155,7 @@ public class Game extends Canvas implements Runnable {
         animate = false;
 
         character.render(g);
-            character.anim.drawAnimation(g, character.getCharPosX(), character.getCharPosY(), 0);//Currently flips the image at a constant rate
+            character.anim.drawAnimation(g, character.getX(), character.getY(), 0);//Currently flips the image at a constant rate
         //End of
         ////////////////////////////////////////////////////////////////////////////////////////
         g.dispose();//Destroys image
