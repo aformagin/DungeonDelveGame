@@ -6,7 +6,8 @@ import java.util.LinkedList;
 
 public class Controller {
 
-    private LinkedList<EntityStructure> wall =  new LinkedList<EntityStructure>();
+    private LinkedList<EntityStructure> wall =  new LinkedList<>();
+    private LinkedList<Character>player = new LinkedList<>();
 
     public void tick(){}
 
@@ -19,6 +20,10 @@ public class Controller {
 
     public void removeWall(EntityStructure block){
      wall.remove(block);
+    }
+
+    public LinkedList<EntityStructure> getEntityStructure(){
+        return wall;
     }
 
 }

@@ -145,13 +145,7 @@ public class Game extends Canvas implements Runnable {
         ////////////////////////////////////////////////////////////////////////////////////////
         //Between these comment lines is where images can be drawn out to the screen
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
-
-        //For loop to draw images across the screen for mapping
-        g.drawImage(background, 0, 32, null);
-        g.drawImage(background, 0, 0, null);
-        g.drawImage(background, 0, 64, null);
-        g.drawImage(background, 32, 32, null);
-
+        
         animate = false;
 
         character.render(g);

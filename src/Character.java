@@ -57,6 +57,10 @@ public class Character extends GameObject implements EntityBase
         x +=velX;
         y += velY;
         anim.runAnimation();
+
+        if(Physics.wallCollision(this, )){
+
+        }
     }
 
     public void render(Graphics g){//Draws image
@@ -188,6 +192,10 @@ public class Character extends GameObject implements EntityBase
         if (dmg < 0)//If the damage is less than 0, it will add the negative of the damage
             //to the players health.
             this.hp = this.hp + -dmg;
+    }
+
+    public Rectangle getBounds(){
+       return new Rectangle((int)x, (int)y, 32, 32) ;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
