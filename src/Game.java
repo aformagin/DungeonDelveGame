@@ -34,24 +34,22 @@ public class Game extends Canvas implements Runnable {
 
     private Character character;
     private boolean animate = false;
-    private Textures tex;
+    //private Textures tex;
     ////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //Initialize
     public void init() {
-        BufferedImageLoader loader = new BufferedImageLoader();
+      //  BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            spriteSheet = loader.loadImage("res/images/sprite_sheet.png");//Loads the sprite sheet which is yet to be created
-            background = loader.loadImage("res/images/missing_texture.png");
-        } catch (IOException e) {//Error catching :D
+        } catch (Exception e) {//Error catching :D
             e.printStackTrace();
         }
 
-        addKeyListener(new KeyInput(this));
+       // addKeyListener(new KeyInput(this));
         this.requestFocus();
-        tex = new Textures(this);
-        character = new Character(100, 100, tex);//Character creation
+       // tex = new Textures(this);
+       // character = new Character(100, 100, tex);//Character creation
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -129,12 +127,12 @@ public class Game extends Canvas implements Runnable {
     ////////////////////////////////////////////////////////////////////////////////////////
 
     private void tick() {//Everything that updates
-        character.tick();
+
     }
 
     private void render() {//Everything that renders
         BufferStrategy bs = this.getBufferStrategy();
-        animate = false;
+
 
         if (bs == null) {
             createBufferStrategy(3);//Triple buffering, increases speed overtime.
@@ -147,9 +145,6 @@ public class Game extends Canvas implements Runnable {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);//Draws image
         
         animate = false;
-
-        character.render(g);
-            character.anim.drawAnimation(g, character.getX(), character.getY(), 0);//Currently flips the image at a constant rate
         //End of
         ////////////////////////////////////////////////////////////////////////////////////////
         g.dispose();//Destroys image
@@ -158,43 +153,9 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    //Keyboard inputs
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_W) {
-            character.setVelY(-2);
-            animate = true;
-        } else if (key == KeyEvent.VK_A) {
-            character.setVelX(-2);
-            animate = true;
-        } else if (key == KeyEvent.VK_S) {
-            character.setVelY(2);
-            animate = true;
-        } else if (key == KeyEvent.VK_D) {
-            character.setVelX(2);
-            animate = true;
-            //character.setPlayer(1,1,32,32);
-        }
-    }
 
 
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_W) {
-            character.setVelY(0);
-            animate = false;
-        } else if (key == KeyEvent.VK_A) {
-            character.setVelX(0);
-            animate = false;
-        } else if (key == KeyEvent.VK_S) {
-            character.setVelY(0);
-            animate = false;
-        } else if (key == KeyEvent.VK_D) {
-            character.setVelX(0);
-            animate = false;
-        }
-    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String args[]) {
